@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ciudadano Digital Responsable | Infografía Interactiva</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <h1>🌐 Ciudadano Digital Responsable</h1>
+  <p class="subtitle">Aprendizaje Socioemocional para la Era Digital</p>
+  <nav class="progress-nav" id="progressNav">
+    <button class="dot active" data-page="1" aria-label="Página 1"></button>
+    <button class="dot" data-page="2" aria-label="Página 2"></button>
+    <button class="dot" data-page="3" aria-label="Página 3"></button>
+    <button class="dot" data-page="4" aria-label="Página 4"></button>
+  </nav>
+</header>
+
+<main id="app">
+
+  <!-- PAGE 1: AUTORREGULACIÓN Y ÉTICA -->
+  <section class="page active" id="page-1" data-page="1">
+    <h2>1. Autorregulación y Ética Digital</h2>
+    <p class="intro-text">Camila tiene decisiones difíciles frente a su pantalla. Haz clic en cada impulso digital para activar la pausa reflexiva.</p>
+
+    <div class="scenario-grid">
+      <button class="impulse-card" data-modal="cheat">
+        <span class="icon">🤖</span>
+        <h3>Usar IA generativa para la tarea</h3>
+        <p>Copiar y pegar una respuesta de IA sin entenderla.</p>
+      </button>
+
+      <button class="impulse-card" data-modal="rumor">
+        <span class="icon">🗣️</span>
+        <h3>Compartir un rumor</h3>
+        <p>Reenviar un chisme sin verificar si es cierto.</p>
+      </button>
+
+      <button class="impulse-card" data-modal="anger">
+        <span class="icon">😡</span>
+        <h3>Responder con rabia</h3>
+        <p>Contestar un comentario ofensivo en caliente.</p>
+      </button>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-box" id="modalBox">
+        <button class="modal-close" id="modalClose" aria-label="Cerrar">&times;</button>
+        <div class="pause-icon">⏸️</div>
+        <h3 id="modalTitle"></h3>
+        <p id="modalBody"></p>
+        <div class="impact-tags" id="modalTags"></div>
+        <button class="btn-primary" id="modalAck">Entendido, elijo mejor</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 2: EMPATÍA DIGITAL -->
+  <section class="page" id="page-2" data-page="2">
+    <h2>2. Empatía Digital y Conciencia Social</h2>
+    <p class="intro-text">Escribe un mensaje a Sofía y observa cómo cambia su estado emocional en tiempo real.</p>
+
+    <div class="empathy-split">
+      <div class="chat-panel">
+        <label for="chatInput">Tu mensaje para Sofía:</label>
+        <textarea id="chatInput" placeholder="Escribe algo como: 'jajaja qué tonto eres' o 'lamento lo que pasó, aquí estoy'"></textarea>
+        <div class="quick-phrases">
+          <button class="chip" data-tone="cruel">"jajaja qué torpe eres"</button>
+          <button class="chip" data-tone="neutral">"oye, ¿estás bien?"</button>
+          <button class="chip" data-tone="kind">"lamento lo que pasó, aquí estoy"</button>
+        </div>
+        <div class="tone-meter">
+          <span>Impacto emocional detectado:</span>
+          <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
+        </div>
+      </div>
+
+      <div class="avatar-panel" id="avatarPanel">
+        <div class="avatar-face" id="avatarFace">
+          <div class="eyes">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+          </div>
+          <div class="mouth" id="avatarMouth"></div>
+        </div>
+        <p class="avatar-name">Sofía</p>
+        <p class="avatar-state" id="avatarState">Se siente tranquila</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: DECISIONES RESPONSABLES -->
+  <section class="page" id="page-3" data-page="3">
+    <h2>3. Navegación de la Información</h2>
+    <p class="intro-text">Avanza por la ruta de datos. En cada punto de control, decide si la información es <strong>verificada</strong> o <strong>fake news / clickbait</strong>.</p>
+
+    <div class="maze-track" id="mazeTrack">
+      <div class="maze-progressbar"><div class="maze-progressfill" id="mazeProgress"></div></div>
+      <div class="checkpoint-stage" id="checkpointStage"></div>
+      <div class="maze-feedback" id="mazeFeedback"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 4: HABILIDADES DE RELACIÓN Y COMUNIDAD -->
+  <section class="page" id="page-4" data-page="4">
+    <h2>4. Compromisos de Ciudadanía Digital</h2>
+    <p class="intro-text">Marca cada compromiso que asumes como ciudadano digital consciente.</p>
+
+    <div class="checklist-zone">
+      <ul class="commit-list" id="commitList">
+        <li><label><input type="checkbox" class="commit-check"> Pensaré antes de publicar o reenviar contenido.</label></li>
+        <li><label><input type="checkbox" class="commit-check"> Verificaré fuentes antes de creer una noticia.</label></li>
+        <li><label><input type="checkbox" class="commit-check"> Trataré a otros en línea con el mismo respeto que en persona.</label></li>
+        <li><label><input type="checkbox" class="commit-check"> Usaré la IA como apoyo para aprender, no para copiar.</label></li>
+        <li><label><input type="checkbox" class="commit-check"> Reportaré o hablaré si veo ciberacoso.</label></li>
+      </ul>
+
+      <div class="badge-zone">
+        <div class="badge-locked" id="badgeContainer">
+          <div class="badge-medal" id="badgeMedal">
+            <div class="badge-ribbon"></div>
+            <div class="badge-circle">
+              <span class="badge-star">★</span>
+            </div>
+          </div>
+          <p class="badge-caption" id="badgeCaption">Completa los compromisos para desbloquear tu insignia</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  <button class="nav-btn" id="btnPrev" disabled>&larr; Anterior</button>
+  <span class="page-indicator" id="pageIndicator">Página 1 de 4</span>
+  <button class="nav-btn" id="btnNext">Siguiente &rarr;</button>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
