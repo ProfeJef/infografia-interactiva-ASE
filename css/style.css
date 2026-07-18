@@ -1,0 +1,382 @@
+/* ==========================================================================
+   VARIABLES GLOBALES: Paleta educativa - azules pizarra + pasteles cálidos
+   ========================================================================== */
+:root {
+  --bg-deep: #1b2a4a;
+  --bg-deep-2: #223760;
+  --panel-bg: #f7f3ec;
+  --pastel-peach: #ffd6b8;
+  --pastel-mint: #c9f2d8;
+  --pastel-rose: #ffd1dc;
+  --pastel-yellow: #fff3c4;
+  --accent-blue: #4d7cff;
+  --accent-blue-dark: #33529e;
+  --text-dark: #1f2937;
+  --text-light: #eef2ff;
+  --danger: #e2593c;
+  --success: #3fae6a;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.25);
+  --transition-fast: 0.25s ease;
+  --transition-med: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-deep-2) 100%);
+  color: var(--text-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 { margin: 0 0 0.4em; }
+
+/* ==========================================================================
+   HEADER + NAVEGACIÓN DE PROGRESO
+   ========================================================================== */
+.app-header {
+  text-align: center;
+  padding: 1.6rem 1rem 1rem;
+}
+.subtitle { color: #b9c6f0; margin-bottom: 1rem; font-size: 0.95rem; }
+
+.progress-nav { display: flex; justify-content: center; gap: 0.6rem; }
+.dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: none; cursor: pointer;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+.dot.active { background: var(--accent-blue); transform: scale(1.35); }
+
+/* ==========================================================================
+   LAYOUT PRINCIPAL - MOBILE FIRST
+   ========================================================================== */
+main#app {
+  flex: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem 2rem;
+  width: 100%;
+}
+
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--transition-med), transform var(--transition-med);
+}
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-text { color: #cfd8f5; margin-bottom: 1.4rem; line-height: 1.5; }
+
+/* ==========================================================================
+   PÁGINA 1: TARJETAS DE IMPULSO + MODAL
+   ========================================================================== */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 700px) {
+  .scenario-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.impulse-card {
+  background: var(--panel-bg);
+  color: var(--text-dark);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.impulse-card:hover, .impulse-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.35);
+}
+.impulse-card .icon { font-size: 2rem; }
+.impulse-card h3 { font-size: 1.05rem; margin-top: 0.5rem; }
+.impulse-card p { font-size: 0.9rem; color: #4b5563; margin: 0.3rem 0 0; }
+
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15, 20, 40, 0.65);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--transition-fast);
+  z-index: 100;
+  padding: 1rem;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+
+.modal-box {
+  background: var(--pastel-yellow);
+  color: var(--text-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  transform: scale(0.85);
+  transition: transform var(--transition-med);
+  box-shadow: var(--shadow-soft);
+}
+.modal-overlay.open .modal-box { transform: scale(1); }
+
+.modal-close {
+  position: absolute; top: 0.6rem; right: 0.8rem;
+  background: none; border: none; font-size: 1.6rem;
+  cursor: pointer; color: var(--text-dark);
+}
+.pause-icon { font-size: 2.2rem; text-align: center; }
+.impact-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.8rem 0; }
+.impact-tags span {
+  background: var(--pastel-rose);
+  border-radius: 20px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  color: white; border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.btn-primary:hover { background: var(--accent-blue-dark); transform: translateY(-2px); }
+
+/* ==========================================================================
+   PÁGINA 2: EMPATÍA - SPLIT SCREEN
+   ========================================================================== */
+.empathy-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 750px) {
+  .empathy-split { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+}
+
+.chat-panel {
+  background: var(--panel-bg);
+  color: var(--text-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-soft);
+}
+.chat-panel label { font-weight: 600; display: block; margin-bottom: 0.5rem; }
+#chatInput {
+  width: 100%; min-height: 90px; padding: 0.7rem;
+  border-radius: 10px; border: 1px solid #d1d5db;
+  font-size: 0.95rem; resize: vertical;
+}
+.quick-phrases { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; }
+.chip {
+  background: var(--pastel-mint);
+  border: none; border-radius: 20px;
+  padding: 0.4rem 0.8rem; font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+.chip:hover { transform: scale(1.05); }
+
+.tone-meter { margin-top: 1rem; font-size: 0.9rem; }
+.meter-track {
+  height: 12px; border-radius: 8px;
+  background: #e5e7eb; margin-top: 0.4rem;
+  overflow: hidden;
+}
+.meter-fill {
+  height: 100%; width: 50%;
+  background: linear-gradient(90deg, var(--success), var(--pastel-yellow), var(--danger));
+  transition: width var(--transition-med);
+}
+
+.avatar-panel {
+  background: var(--pastel-peach);
+  color: var(--text-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: background var(--transition-med);
+}
+.avatar-face {
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  background: #ffe9a8;
+  margin: 0 auto 1rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: background var(--transition-med);
+}
+.eyes { display: flex; gap: 22px; margin-bottom: 12px; }
+.eye {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--text-dark);
+  transition: transform var(--transition-fast), height var(--transition-fast);
+}
+.mouth {
+  width: 50px; height: 22px;
+  border-bottom: 5px solid var(--text-dark);
+  border-radius: 0 0 50px 50px;
+  transition: all var(--transition-med);
+}
+.avatar-name { font-weight: 700; margin: 0; }
+.avatar-state { font-size: 0.9rem; margin-top: 0.2rem; }
+
+/* ==========================================================================
+   PÁGINA 3: MINI-LABERINTO DE DECISIONES
+   ========================================================================== */
+.maze-track {
+  background: var(--panel-bg);
+  color: var(--text-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-soft);
+}
+.maze-progressbar {
+  height: 10px; border-radius: 8px; background: #e5e7eb; margin-bottom: 1.2rem; overflow: hidden;
+}
+.maze-progressfill {
+  height: 100%; width: 0%;
+  background: var(--accent-blue);
+  transition: width var(--transition-med);
+}
+.checkpoint-stage { min-height: 220px; }
+.clue-box {
+  background: var(--pastel-yellow);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.checkpoint-title { font-size: 1.05rem; margin-bottom: 0.6rem; }
+.checkpoint-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.btn-choice {
+  flex: 1; min-width: 140px;
+  border: none; border-radius: 12px;
+  padding: 0.8rem; cursor: pointer;
+  font-weight: 600;
+  transition: transform var(--transition-fast);
+}
+.btn-choice.fake { background: var(--pastel-rose); }
+.btn-choice.verified { background: var(--pastel-mint); }
+.btn-choice:hover { transform: translateY(-3px); }
+
+.maze-feedback {
+  margin-top: 1rem;
+  min-height: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+.maze-feedback.show { opacity: 1; }
+.maze-feedback.correct { color: var(--success); }
+.maze-feedback.incorrect { color: var(--danger); }
+
+/* ==========================================================================
+   PÁGINA 4: CHECKLIST + INSIGNIA
+   ========================================================================== */
+.checklist-zone {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 750px) {
+  .checklist-zone { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+}
+
+.commit-list {
+  list-style: none; padding: 0; margin: 0;
+  background: var(--panel-bg);
+  color: var(--text-dark);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.commit-list li { border-bottom: 1px solid #e5e7eb; }
+.commit-list li:last-child { border-bottom: none; }
+.commit-list label {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.9rem 1.1rem;
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+.commit-check { width: 18px; height: 18px; accent-color: var(--accent-blue); }
+
+.badge-zone {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--pastel-rose);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  box-shadow: var(--shadow-soft);
+}
+.badge-medal {
+  opacity: 0.35; filter: grayscale(0.7);
+  transition: opacity var(--transition-med), filter var(--transition-med), transform var(--transition-med);
+}
+.badge-medal.unlocked {
+  opacity: 1; filter: grayscale(0);
+  transform: scale(1.08) rotate(-3deg);
+  animation: pop 0.6s ease;
+}
+@keyframes pop {
+  0% { transform: scale(0.6) rotate(0deg); }
+  60% { transform: scale(1.15) rotate(-6deg); }
+  100% { transform: scale(1.08) rotate(-3deg); }
+}
+.badge-ribbon {
+  width: 20px; height: 60px;
+  background: var(--accent-blue-dark);
+  margin: 0 auto -10px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+}
+.badge-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffe9a8, var(--accent-blue));
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+.badge-star { font-size: 2.4rem; color: white; }
+.badge-caption {
+  margin-top: 1rem; text-align: center; font-size: 0.9rem; color: var(--text-dark);
+}
+
+/* ==========================================================================
+   FOOTER DE NAVEGACIÓN
+   ========================================================================== */
+.app-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.2rem;
+  background: rgba(0,0,0,0.2);
+  position: sticky; bottom: 0;
+}
+.nav-btn {
+  background: var(--accent-blue);
+  color: white; border: none;
+  padding: 0.7rem 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.nav-btn:hover:not(:disabled) { background: var(--accent-blue-dark); transform: translateY(-2px); }
+.nav-btn:disabled { background: #555f7a; cursor: not-allowed; opacity: 0.6; }
+.page-indicator { font-size: 0.85rem; color: #cfd8f5; }
