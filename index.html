@@ -1,196 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ciudadano Digital Responsable | Infografía Interactiva</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo Vivo: Infografía RPG</title>
+    <!-- Fuentes Pixeladas -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/rpg-ui.css">
 </head>
 <body>
 
-<!-- Fondo decorativo animado: blobs + partículas flotantes, puramente CSS -->
-<div class="bg-decor" aria-hidden="true">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="particles" id="particles"></div>
-</div>
-
-<header class="app-header">
-  <div class="logo-badge">🌐</div>
-  <div class="header-text">
-    <h1>Ciudadano Digital Responsable</h1>
-    <p class="subtitle">Un viaje interactivo de aprendizaje socioemocional</p>
-  </div>
-  <nav class="progress-nav" id="progressNav">
-    <button class="dot active" data-page="1" aria-label="Página 1"><span>1</span></button>
-    <button class="dot" data-page="2" aria-label="Página 2"><span>2</span></button>
-    <button class="dot" data-page="3" aria-label="Página 3"><span>3</span></button>
-    <button class="dot" data-page="4" aria-label="Página 4"><span>4</span></button>
-  </nav>
-</header>
-
-<main id="app">
-
-  <!-- PAGE 1: AUTORREGULACIÓN Y ÉTICA -->
-  <section class="page active" id="page-1" data-page="1">
-    <div class="hero-banner hero-1">
-      <div class="hero-emoji">🧠✨</div>
-      <div>
-        <span class="hero-tag">Módulo 1</span>
-        <h2>Autorregulación y Ética Digital</h2>
-        <p class="intro-text">Camila enfrenta decisiones difíciles frente a su pantalla. Toca cada impulso digital para activar la pausa reflexiva y descubrir su impacto real.</p>
-      </div>
-    </div>
-
-    <div class="scenario-grid">
-      <button class="impulse-card card-glow-1" data-modal="cheat">
-        <span class="icon-circle">🤖</span>
-        <h3>Usar IA generativa</h3>
-        <p>Copiar y pegar una respuesta de IA sin entenderla.</p>
-        <span class="card-cta">Pausa y piensa →</span>
-      </button>
-
-      <button class="impulse-card card-glow-2" data-modal="rumor">
-        <span class="icon-circle">🗣️</span>
-        <h3>Compartir un rumor</h3>
-        <p>Reenviar un chisme sin verificar si es cierto.</p>
-        <span class="card-cta">Pausa y piensa →</span>
-      </button>
-
-      <button class="impulse-card card-glow-3" data-modal="anger">
-        <span class="icon-circle">😡</span>
-        <h3>Responder con rabia</h3>
-        <p>Contestar un comentario ofensivo en caliente.</p>
-        <span class="card-cta">Pausa y piensa →</span>
-      </button>
-    </div>
-
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal-box" id="modalBox">
-        <button class="modal-close" id="modalClose" aria-label="Cerrar">&times;</button>
-        <div class="pause-icon">⏸️</div>
-        <h3 id="modalTitle"></h3>
-        <p id="modalBody"></p>
-        <div class="impact-tags" id="modalTags"></div>
-        <button class="btn-primary" id="modalAck">Entendido, elijo mejor</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAGE 2: EMPATÍA DIGITAL -->
-  <section class="page" id="page-2" data-page="2">
-    <div class="hero-banner hero-2">
-      <div class="hero-emoji">💬💗</div>
-      <div>
-        <span class="hero-tag">Módulo 2</span>
-        <h2>Empatía Digital y Conciencia Social</h2>
-        <p class="intro-text">Escribe un mensaje a Sofía y observa en vivo cómo tus palabras transforman su estado emocional.</p>
-      </div>
-    </div>
-
-    <div class="empathy-split">
-      <div class="chat-panel">
-        <label for="chatInput">✍️ Tu mensaje para Sofía:</label>
-        <textarea id="chatInput" placeholder="Escribe algo como: 'jajaja qué tonto eres' o 'lamento lo que pasó, aquí estoy'"></textarea>
-        <div class="quick-phrases">
-          <button class="chip chip-cruel" data-tone="cruel">😠 "jajaja qué torpe eres"</button>
-          <button class="chip chip-neutral" data-tone="neutral">😐 "oye, ¿estás bien?"</button>
-          <button class="chip chip-kind" data-tone="kind">💛 "lamento lo que pasó, aquí estoy"</button>
-        </div>
-        <div class="tone-meter">
-          <span>Impacto emocional detectado:</span>
-          <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
-          <div class="meter-labels"><span>Calma</span><span>Alerta</span><span>Dolor</span></div>
-        </div>
-      </div>
-
-      <div class="avatar-panel" id="avatarPanel">
-        <div class="avatar-ring">
-          <div class="avatar-face" id="avatarFace">
-            <div class="cheeks"><span class="cheek left"></span><span class="cheek right"></span></div>
-            <div class="eyes">
-              <div class="eye left"></div>
-              <div class="eye right"></div>
+    <!-- Barra de Estado UI (Fija superior) -->
+    <header class="status-bar">
+        <div class="hud-element">
+            <span class="hud-label">ASE (Aprendizaje Social y Emocional)</span>
+            <div class="progress-container">
+                <div class="progress-bar" id="ase-bar"></div>
             </div>
-            <div class="mouth" id="avatarMouth"></div>
-            <div class="tear" id="avatarTear"></div>
-          </div>
+            <span class="hud-percent" id="ase-percent">0%</span>
         </div>
-        <p class="avatar-name">Sofía</p>
-        <p class="avatar-state" id="avatarState">Se siente tranquila</p>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- PAGE 3: DECISIONES RESPONSABLES -->
-  <section class="page" id="page-3" data-page="3">
-    <div class="hero-banner hero-3">
-      <div class="hero-emoji">🧭🔎</div>
-      <div>
-        <span class="hero-tag">Módulo 3</span>
-        <h2>Navegación de la Información</h2>
-        <p class="intro-text">Recorre la ruta de datos. En cada punto de control, decide si la información es <strong>verificada</strong> o <strong>fake news / clickbait</strong>.</p>
-      </div>
-    </div>
+    <!-- Contenedor Principal del Mapa -->
+    <main class="world-viewport">
+        <div class="map-container" id="map-container">
+            
+            <!-- Camino dibujado con CSS -->
+            <div class="path-line"></div>
 
-    <div class="maze-track" id="mazeTrack">
-      <div class="maze-path" id="mazePath"></div>
-      <div class="maze-progressbar"><div class="maze-progressfill" id="mazeProgress"></div></div>
-      <div class="checkpoint-stage" id="checkpointStage"></div>
-      <div class="maze-feedback" id="mazeFeedback"></div>
-    </div>
-  </section>
-
-  <!-- PAGE 4: HABILIDADES DE RELACIÓN Y COMUNIDAD -->
-  <section class="page" id="page-4" data-page="4">
-    <div class="hero-banner hero-4">
-      <div class="hero-emoji">🤝🏆</div>
-      <div>
-        <span class="hero-tag">Módulo 4</span>
-        <h2>Compromisos de Ciudadanía Digital</h2>
-        <p class="intro-text">Marca cada compromiso que asumes como ciudadano digital consciente y desbloquea tu insignia.</p>
-      </div>
-    </div>
-
-    <div class="checklist-zone">
-      <ul class="commit-list" id="commitList">
-        <li><label><input type="checkbox" class="commit-check"><span class="check-icon">✔</span> Pensaré antes de publicar o reenviar contenido.</label></li>
-        <li><label><input type="checkbox" class="commit-check"><span class="check-icon">✔</span> Verificaré fuentes antes de creer una noticia.</label></li>
-        <li><label><input type="checkbox" class="commit-check"><span class="check-icon">✔</span> Trataré a otros en línea con el mismo respeto que en persona.</label></li>
-        <li><label><input type="checkbox" class="commit-check"><span class="check-icon">✔</span> Usaré la IA como apoyo para aprender, no para copiar.</label></li>
-        <li><label><input type="checkbox" class="commit-check"><span class="check-icon">✔</span> Reportaré o hablaré si veo ciberacoso.</label></li>
-      </ul>
-
-      <div class="badge-zone">
-        <div class="confetti-layer" id="confettiLayer"></div>
-        <div class="badge-locked" id="badgeContainer">
-          <div class="badge-medal" id="badgeMedal">
-            <div class="badge-glow"></div>
-            <div class="badge-ribbon left"></div>
-            <div class="badge-ribbon right"></div>
-            <div class="badge-circle">
-              <span class="badge-star">★</span>
+            <!-- El Avatar del Jugador (SVG Inline Pixel Art) -->
+            <div class="avatar idle" id="player-avatar">
+                <svg width="40" height="40" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="1" width="4" height="3" fill="#ffb8b8"/> <!-- Cara -->
+                    <rect x="2" y="0" width="6" height="1" fill="#8b4513"/> <!-- Sombrero/Pelo -->
+                    <rect x="2" y="1" width="1" height="1" fill="#8b4513"/>
+                    <rect x="7" y="1" width="1" height="1" fill="#8b4513"/>
+                    <rect x="3" y="4" width="4" height="4" fill="#3498db"/> <!-- Cuerpo -->
+                    <rect x="2" y="4" width="1" height="3" fill="#ffb8b8"/> <!-- Brazo Izq -->
+                    <rect x="7" y="4" width="1" height="3" fill="#ffb8b8"/> <!-- Brazo Der -->
+                    <rect x="3" y="8" width="1" height="2" fill="#2c3e50"/> <!-- Pierna Izq -->
+                    <rect x="6" y="8" width="1" height="2" fill="#2c3e50"/> <!-- Pierna Der -->
+                </svg>
+                <div class="player-shadow"></div>
             </div>
-          </div>
-          <p class="badge-title" id="badgeTitle">Insignia bloqueada</p>
-          <p class="badge-caption" id="badgeCaption">Completa los 5 compromisos para desbloquearla (0/5)</p>
+
+            <!-- Las estaciones se renderizarán dinámicamente aquí vía JS -->
         </div>
-      </div>
+    </main>
+
+    <!-- Modal tipo Pergamino RPG -->
+    <div class="modal-overlay hidden" id="dialog-modal">
+        <div class="rpg-dialog-box">
+            <h2 id="dialog-title">Título</h2>
+            <h3 id="dialog-subtitle">Responsable</h3>
+            <p id="dialog-text">Texto de la misión pedagógica.</p>
+            <button class="rpg-btn" id="close-dialog-btn">Continuar</button>
+        </div>
     </div>
-  </section>
 
-</main>
-
-<footer class="app-footer">
-  <button class="nav-btn" id="btnPrev" disabled>&larr; Anterior</button>
-  <span class="page-indicator" id="pageIndicator">Página 1 de 4</span>
-  <button class="nav-btn" id="btnNext">Siguiente &rarr;</button>
-</footer>
-
-<script src="script.js"></script>
+    <!-- Script Principal (Módulo) -->
+    <script type="module" src="./js/app.js"></script>
 </body>
 </html>
