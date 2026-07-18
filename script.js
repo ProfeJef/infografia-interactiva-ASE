@@ -26,9 +26,9 @@ const modalContent = {
 };
 
 const toneProfiles = {
-  cruel:   { meter: 90, state: "Se siente herida y ansiosa", face: "#f7a1a1", eyeH: "6px", mouth: "frown" },
-  neutral: { meter: 40, state: "Se siente insegura, pero tranquila", face: "#ffe9a8", eyeH: "14px", mouth: "flat" },
-  kind:    { meter: 10, state: "Se siente apoyada y en calma", face: "#c9f2d8", eyeH: "14px", mouth: "smile" },
+  cruel:   { meter: 92, state: "Se siente herida y ansiosa 😢", face: "#f7a1a1", eyeH: "6px", mouth: "frown", tear: true },
+  neutral: { meter: 40, state: "Se siente insegura, pero tranquila 😐", face: "#ffe9a8", eyeH: "14px", mouth: "flat", tear: false },
+  kind:    { meter: 8,  state: "Se siente apoyada y en calma 😊", face: "#c9f2d8", eyeH: "14px", mouth: "smile", tear: false },
 };
 
 const mazeCheckpoints = [
@@ -53,6 +53,26 @@ const mazeCheckpoints = [
     explain: "Correcto: la trazabilidad a una fuente académica primaria es un fuerte indicador de confiabilidad.",
   },
 ];
+
+function initParticles() {
+  const container = document.getElementById("particles");
+  const colors = ["#5b8cff", "#34e0d0", "#ff7a6b", "#e0d4ff", "#ffd6b8"];
+  const count = 26;
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    const size = Math.random() * 5 + 3;
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+    p.style.left = `${Math.random() * 100}%`;
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = `${Math.random() * 12 + 10}s`;
+    p.style.animationDelay = `${Math.random() * 10}s`;
+    p.style.bottom = `-10px`;
+    container.appendChild(p);
+  }
+}
 
 function goToPage(pageNum) {
   if (pageNum < 1 || pageNum > state.totalPages) return;
@@ -116,6 +136,7 @@ function updateAvatar(toneKey) {
   document.getElementById("meterFill").style.width = `${profile.meter}%`;
   document.getElementById("avatarState").textContent = profile.state;
   document.getElementById("avatarFace").style.background = profile.face;
+  document.getElementById("avatarTear").style.opacity = profile.tear ? "1" : "0";
 
   document.querySelectorAll(".eye").forEach((eye) => (eye.style.height = profile.eyeH));
 
@@ -140,7 +161,7 @@ function initEmpathySimulator() {
 
   document.querySelectorAll(".chip").forEach((chip) => {
     chip.addEventListener("click", () => {
-      input.value = chip.textContent.replace(/"/g, "");
+      input.value = chip.textContent.replace(/["\u{1F600}-\u{1F64F}\u{2600}-\u{27BF}]/gu, "").trim();
       updateAvatar(chip.dataset.tone);
     });
   });
@@ -196,10 +217,27 @@ function handleMazeChoice(choseFake, checkpoint) {
   }, 1600);
 }
 
+function launchConfetti() {
+  const layer = document.getElementById("confettiLayer");
+  const colors = ["#5b8cff", "#34e0d0", "#ff7a6b", "#ffd166", "#e0d4ff"];
+  for (let i = 0; i < 40; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti-piece";
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay = `${Math.random() * 0.4}s`;
+    piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+    layer.appendChild(piece);
+    setTimeout(() => piece.remove(), 2200);
+  }
+}
+
 function initCommitmentChecklist() {
   const checks = document.querySelectorAll(".commit-check");
   const badge = document.getElementById("badgeMedal");
   const caption = document.getElementById("badgeCaption");
+  const title = document.getElementById("badgeTitle");
+  let wasUnlocked = false;
 
   function updateBadge() {
     const total = checks.length;
@@ -207,10 +245,14 @@ function initCommitmentChecklist() {
 
     if (checked === total) {
       badge.classList.add("unlocked");
-      caption.textContent = "🏆 ¡Insignia desbloqueada: Líder Digital Consciente!";
+      title.textContent = "🏆 ¡Insignia desbloqueada!";
+      caption.textContent = "Líder Digital Consciente";
+      if (!wasUnlocked) { launchConfetti(); wasUnlocked = true; }
     } else {
       badge.classList.remove("unlocked");
-      caption.textContent = `Marca los ${total} compromisos para desbloquear tu insignia (${checked}/${total})`;
+      title.textContent = "Insignia bloqueada";
+      caption.textContent = `Completa los ${total} compromisos para desbloquearla (${checked}/${total})`;
+      wasUnlocked = false;
     }
   }
 
@@ -219,6 +261,7 @@ function initCommitmentChecklist() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initParticles();
   initFooterNav();
   initPauseModals();
   initEmpathySimulator();
