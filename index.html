@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruta semanal ASE - V2.6</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="loading" aria-live="polite">Cargando mapa...</div>
+
+  <div id="welcomeOverlay" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc">
+    <div class="welcomeBox pixel-panel">
+      <div class="pixelTag">INICIO</div>
+      <h1 id="welcomeTitle">Ruta semanal ASE</h1>
+      <p id="welcomeDesc">
+        Esta aventura hace parte de <strong>Aula abierta para el aprovechamiento del tiempo libre</strong>.
+        Aquí los descansos se transforman en espacios para jugar, crear, convivir y aprender juntos.
+      </p>
+      <p class="hint">Durante el recorrido descubrirás experiencias de música, juego, movimiento, pensamiento y expresión.</p>
+      <p class="hint controlsHint">Mover: Flechas o WASD · Abrir: E · En móvil o tablet: joystick y botón rojo.</p>
+      <div class="welcomeActions">
+        <button id="startBtn" type="button">Comenzar misión</button>
+      </div>
+    </div>
+  </div>
+
+  <header id="hud" aria-label="Indicadores del recorrido">
+    <div class="hudPanel pixel-panel">
+      <div class="hudTop">
+        <div class="hudTitle">RUTA ASE</div>
+        <div class="hudControls">
+          <button id="btnRotate" type="button" class="hudBtn" aria-label="Poner en horizontal">↔</button>
+        </div>
+      </div>
+      <div class="hudRow">
+        <span class="hudName">PROGRESO</span>
+        <div class="barOuter"><div id="progressFill" class="barInner blue"></div></div>
+        <span id="progressText">0/5</span>
+      </div>
+      <div class="hudMiniRow">
+        <div class="miniStat"><span>ASE</span><strong id="asePct">0%</strong></div>
+        <div class="miniStat"><span>SEMANA</span><strong id="weekPct">0%</strong></div>
+        <div class="miniStat"><span>FLOW</span><strong id="flowPct">0%</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="rotateHint" aria-hidden="true">
+    <div class="rotateBox pixel-panel">
+      <div class="pixelTag">MODO DETALLE</div>
+      <h3>Mejor en horizontal</h3>
+      <p>En algunos teléfonos y tablets la ruta se ve mejor en modo horizontal.</p>
+      <div class="rotateActions">
+        <button id="rotateNowBtn" type="button">Poner horizontal</button>
+        <button id="rotateCloseBtn" type="button" class="secondaryAlt">Seguir así</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameWrap">
+    <canvas id="game" width="1024" height="576" tabindex="0" aria-label="Mapa interactivo de la ruta semanal ASE"></canvas>
+  </div>
+
+  <div id="joystickZone" aria-label="Joystick táctil">
+    <div id="joystickStick"></div>
+  </div>
+  <button id="btnAction" type="button" aria-label="Interactuar">E</button>
+
+  <div id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modalBox pixel-panel" tabindex="-1">
+      <div id="modalTag" class="pixelTag">DÍA</div>
+      <h2 id="modalTitle">Título</h2>
+      <div id="modalBody"></div>
+      <div class="modalActions">
+        <button id="closeBtn" type="button">Cerrar</button>
+        <button id="restartBtn" type="button" class="secondary hidden">Reiniciar ruta</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
