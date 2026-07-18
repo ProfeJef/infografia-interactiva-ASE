@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruta semanal ASE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="loading">Cargando...</div>
+
+  <div id="welcomeOverlay">
+    <div class="welcomeBox">
+      <h1>Ruta semanal ASE</h1>
+      <p>
+        Recorre el camino, acércate a cada día y presiona <strong>E</strong>
+        para descubrir su aporte al aprendizaje social y emocional.
+      </p>
+      <p class="hint">También puedes usar flechas, WASD o controles táctiles.</p>
+      <button id="startBtn">Comenzar</button>
+    </div>
+  </div>
+
+  <header id="hud">
+    <div class="hudBar">
+      <span class="hudIcon">❤️</span>
+      <span>ASE</span>
+      <div class="barOuter">
+        <div id="aseBar" class="barInner red"></div>
+      </div>
+      <span id="asePct">0%</span>
+    </div>
+
+    <div class="hudBar">
+      <span class="hudIcon">📅</span>
+      <span>SEMANA</span>
+      <div class="barOuter">
+        <div id="weekBar" class="barInner yellow"></div>
+      </div>
+      <span id="weekPct">0%</span>
+    </div>
+
+    <div class="hudBar">
+      <span class="hudIcon">✨</span>
+      <span>FLOW</span>
+      <div class="barOuter">
+        <div id="flowBar" class="barInner green"></div>
+      </div>
+      <span id="flowPct">0%</span>
+    </div>
+
+    <div id="progressBox">
+      <div id="progressFill"></div>
+      <span id="progressText">0/5 días</span>
+    </div>
+  </header>
+
+  <div id="gameWrap">
+    <canvas id="game" width="1024" height="576"></canvas>
+  </div>
+
+  <div id="fade"></div>
+
+  <!-- Controles táctiles -->
+  <div id="joystickZone" aria-label="Joystick táctil">
+    <div id="joystickStick"></div>
+  </div>
+
+  <button id="btnAction" aria-label="Interactuar">E</button>
+
+  <!-- Controles de orientación -->
+  <button id="btnRotate" aria-label="Poner en modo horizontal">↔</button>
+  <button id="btnBack" aria-label="Volver al modo normal">↩</button>
+
+  <div id="rotateHint">
+    <div class="rotateBox">
+      <h3>Modo detalle</h3>
+      <p>Gira el teléfono o toca el botón para ver mejor la ruta semanal ASE.</p>
+      <button id="rotateNowBtn">Poner horizontal</button>
+      <button id="rotateCloseBtn">Seguir en vertical</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalOverlay">
+    <div class="modalBox">
+      <div id="modalTag">DÍA</div>
+      <h2 id="modalTitle">Título</h2>
+      <div id="modalBody"></div>
+      <button id="closeBtn">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
